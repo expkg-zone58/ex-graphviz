@@ -1,0 +1,4 @@
+<zip dest="dist/ex-graphviz.zar">
+	<text src="src/main/expath-pkg.xml" dest="expath-pkg.xml" />
+	<text src="src/main/content/graphviz.xqm" dest="content/graphviz.xqm" />
+</zip>

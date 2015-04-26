@@ -1,0 +1,14 @@
+<package xmlns="http://expath.org/ns/pkg"
+         name="quodatum.ex-graphviz"
+         abbrev="content"
+         version="0.0.0"
+         spec="1.0">
+
+   <title>XQuery interface for Graphviz </title>
+   <dependency processor="basex" />
+   <xquery> 
+     <namespace>quodatum.ex-graphviz</namespace>
+     <file>graphviz.xqm</file>
+   </xquery>
+
+</package>
