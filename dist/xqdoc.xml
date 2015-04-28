@@ -1,0 +1,176 @@
+<xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
+  <xqdoc:control>
+    <xqdoc:date>2015-04-28T22:08:17.07+01:00</xqdoc:date>
+    <xqdoc:version>1.1</xqdoc:version>
+  </xqdoc:control>
+  <xqdoc:module type="library">
+    <xqdoc:uri>quodatum.ex-graphviz</xqdoc:uri>
+    <xqdoc:name>graphviz.xqm</xqdoc:name>
+    <xqdoc:comment>
+      <xqdoc:description>graphviz module
+based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:description>
+    </xqdoc:comment>
+  </xqdoc:module>
+  <xqdoc:namespaces>
+    <xqdoc:namespace prefix="gr" uri="quodatum.ex-graphviz"/>
+    <xqdoc:namespace prefix="proc" uri="http://basex.org/modules/proc"/>
+    <xqdoc:namespace prefix="file" uri="http://expath.org/ns/file"/>
+    <xqdoc:namespace prefix="xslt" uri="http://basex.org/modules/xslt"/>
+    <xqdoc:namespace prefix="svg" uri="http://www.w3.org/2000/svg"/>
+    <xqdoc:namespace prefix="xlink" uri="http://www.w3.org/1999/xlink"/>
+    <xqdoc:namespace prefix="ann" uri="http://www.w3.org/2012/xquery"/>
+  </xqdoc:namespaces>
+  <xqdoc:imports>
+    <xqdoc:import type="library">
+      <xqdoc:uri>http://basex.org/modules/proc</xqdoc:uri>
+    </xqdoc:import>
+    <xqdoc:import type="library">
+      <xqdoc:uri>http://expath.org/ns/file</xqdoc:uri>
+    </xqdoc:import>
+    <xqdoc:import type="library">
+      <xqdoc:uri>http://basex.org/modules/xslt</xqdoc:uri>
+    </xqdoc:import>
+  </xqdoc:imports>
+  <xqdoc:variables>
+    <xqdoc:variable>
+      <xqdoc:name>gr:dotpath</xqdoc:name>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:type occurrence="*">item()</xqdoc:type>
+    </xqdoc:variable>
+    <xqdoc:variable>
+      <xqdoc:name>gr:tmpdir</xqdoc:name>
+      <xqdoc:comment>
+        <xqdoc:description>folder for temp files \=windows</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:type occurrence="*">item()</xqdoc:type>
+    </xqdoc:variable>
+    <xqdoc:variable>
+      <xqdoc:name>gr:empty</xqdoc:name>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:type>element()</xqdoc:type>
+    </xqdoc:variable>
+  </xqdoc:variables>
+  <xqdoc:functions>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>Layout one or more graphs given in the DOT language and render them as SVG.</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>dot</xqdoc:name>
+      <xqdoc:signature>declare function dot($dot as xs:string*, $params as xs:string*) as node()*</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>dot</xqdoc:name>
+          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>params</xqdoc:name>
+          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">node()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>run dot command</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>dot-execute</xqdoc:name>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:signature>declare %private function dot-execute($dot as xs:string, $params as xs:string*) as element(result)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>dot</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>params</xqdoc:name>
+          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>element(result)</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>run dot command  returning binary</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>dot-executeb</xqdoc:name>
+      <xqdoc:signature>declare function dot-executeb($dot as xs:string, $params as xs:string*) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>dot</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>params</xqdoc:name>
+          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>xs:base64Binary</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="1">
+      <xqdoc:comment>
+        <xqdoc:description>cleanup dot svg result</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>dot-svg</xqdoc:name>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:signature>declare %private function dot-svg($r as element(result)) as element(svg:svg)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>r</xqdoc:name>
+          <xqdoc:type>element(result)</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>element(svg:svg)</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="1">
+      <xqdoc:comment>
+        <xqdoc:description>set svg to autosize 100%</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>autosize</xqdoc:name>
+      <xqdoc:signature>declare function autosize($svg as node()) as node()</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>svg</xqdoc:name>
+          <xqdoc:type>node()</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>node()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="1">
+      <xqdoc:comment>
+        <xqdoc:description>set svg to autosize 100%</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>autosize-old</xqdoc:name>
+      <xqdoc:signature>declare function autosize-old($svg as node()) as node()</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>svg</xqdoc:name>
+          <xqdoc:type>node()</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>node()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+  </xqdoc:functions>
+</xqdoc:xqdoc>

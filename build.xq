@@ -11,6 +11,6 @@
 let $files:=$pack/*
 let $zip   := archive:create( $files/@dest/fn:string(), $files ! local:read(.)) 
 return ( file:write-binary(resolve-uri($pack/@dest),$zip)
-         ,file:write(resolve-uri("dist/xqdoc.xml"),inspect:xqdoc(resolve-uri("src/main/content/metadata-extractor.xqm")))
+         ,file:write(resolve-uri("dist/xqdoc.xml"),inspect:xqdoc(resolve-uri("src/main/content/graphviz.xqm")))
      
 )

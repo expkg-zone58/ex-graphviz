@@ -3,8 +3,8 @@
 : based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz
 :)
 
-module namespace gr="quodatum.graphviz";
-declare default function namespace 'quodatum.graphviz';
+module namespace gr="quodatum.ex-graphviz";
+declare default function namespace 'quodatum.ex-graphviz';
 import module namespace proc="http://basex.org/modules/proc";
 import module namespace file="http://expath.org/ns/file";
 import module namespace xslt="http://basex.org/modules/xslt";
