@@ -2,5 +2,12 @@
 XQuery interface for Graphviz with EXPath packaging.
 
 
-## to build
-basex .build.xq
+##  Build
+Creates `dist/ex-grapviz.zar`
+````
+basex build.xq
+````
+## Test
+````
+basex -t srs/test/test.xq
+````
