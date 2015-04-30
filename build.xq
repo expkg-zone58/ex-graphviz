@@ -13,8 +13,10 @@ declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/*;
   let $f:=fn:resolve-uri( translate($name,"\","/"),$src)
   return  file:read-binary($f)
  };
- 
-let $files:=file:list($src,fn:true()) 
+ declare function local:files($src){
+   filter(file:list($src,fn:true()),file:is-file#1)!translate(.,"\","/") 
+ };
+let $files:=local:files($src) 
 let $data:= $files!local:read(.)
 let $zip   := archive:create( $files, $data)
 let $name:= concat($package/@name , "-" ,$package/@version, ".xar")
