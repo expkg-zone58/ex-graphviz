@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2015-04-28T22:08:17.07+01:00</xqdoc:date>
+    <xqdoc:date>2015-04-30T23:18:08.712+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -140,20 +140,37 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
         <xqdoc:type>element(svg:svg)</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
+    <xqdoc:function arity="2">
+      <xqdoc:name>rdf</xqdoc:name>
+      <xqdoc:signature>declare function rdf($title as xs:string, $ver as xs:string) as item()*</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>title</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>ver</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>element()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
     <xqdoc:function arity="1">
       <xqdoc:comment>
         <xqdoc:description>set svg to autosize 100%</xqdoc:description>
       </xqdoc:comment>
       <xqdoc:name>autosize</xqdoc:name>
-      <xqdoc:signature>declare function autosize($svg as node()) as node()</xqdoc:signature>
+      <xqdoc:signature>declare function autosize($svg as element(svg:svg)) as element(svg:svg)</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>svg</xqdoc:name>
-          <xqdoc:type>node()</xqdoc:type>
+          <xqdoc:type>element(svg:svg)</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
-        <xqdoc:type>node()</xqdoc:type>
+        <xqdoc:type>element(svg:svg)</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="1">

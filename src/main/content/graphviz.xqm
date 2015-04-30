@@ -31,7 +31,8 @@ width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 (:~
 :Layout one or more graphs given in the DOT language and render them as SVG.
 :)
-declare function dot( $dot as xs:string*, $params as xs:string*) as node()*{
+declare function dot( $dot as xs:string*, $params as xs:string*) as node()*
+{
    let $params:=("-Tsvg")
     for $d in $dot 
     return if(fn:not($d))
@@ -41,7 +42,8 @@ declare function dot( $dot as xs:string*, $params as xs:string*) as node()*{
 };
 
 (:~ run dot command :)
-declare %private function dot-execute( $dot as xs:string, $params as xs:string*) as element(result){
+declare %private function dot-execute( $dot as xs:string, $params as xs:string*) as element(result)
+{
     let $fname:=$gr:tmpdir || random:uuid()
     let $junk:=file:write-text($fname,$dot)
     let $r:=proc:execute($gr:dotpath , ($params,$fname))
@@ -52,7 +54,8 @@ declare %private function dot-execute( $dot as xs:string, $params as xs:string*)
 };
 
 (:~ run dot command  returning binary :)
-declare  function dot-executeb( $dot as xs:string, $params as xs:string*) as xs:base64Binary{
+declare  function dot-executeb( $dot as xs:string, $params as xs:string*) as xs:base64Binary
+{
     let $fname:=$gr:tmpdir || random:uuid()
     let $oname:=$fname || ".o"
     let $junk:=file:write-text($fname,$dot)
@@ -66,20 +69,30 @@ declare  function dot-executeb( $dot as xs:string, $params as xs:string*) as xs:
 };
 
 (:~ cleanup dot svg result :)
-declare %private function dot-svg( $r as element(result)) as element(svg:svg){ 
+declare %private function dot-svg( $r as element(result)) as element(svg:svg)
+{ 
     let $s:=fn:parse-xml($r/output)  (: o/p  has comment nodes :) 
     let $ver:=$s/comment()[1]/fn:normalize-space()
     let $title:=$s/comment()[2]/fn:normalize-space()
-    let $svg:=$s/* 				
+    let $svg:=$s/*
     return   <svg xmlns="http://www.w3.org/2000/svg" 
     xmlns:xlink="http://www.w3.org/1999/xlink" >
   {$svg/@* ,
-   <metadata>
+  rdf($title,$ver),
+  $svg/*}
+  </svg>
+ 
+};
+
+declare function rdf($title as xs:string,
+                    $ver as xs:string)
+{
+ <metadata>
     <rdf:RDF
            xmlns:rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
            xmlns:rdfs = "http://www.w3.org/2000/01/rdf-schema#"
            xmlns:dc = "http://purl.org/dc/elements/1.1/" >
-        <rdf:Description about="https://github.com/apb2006/graphxq"
+        <rdf:Description about="https://github.com/Quodatum/ex-graphviz"
              dc:title="{$title}"
              dc:description="A graph visualization"
              dc:date="{fn:current-dateTime()}"
@@ -87,22 +100,19 @@ declare %private function dot-svg( $r as element(result)) as element(svg:svg){
           <dc:creator>
             <rdf:Bag>
               <rdf:li>{$ver}</rdf:li>
-              <rdf:li resource="https://github.com/apb2006/graphxq"/>
+              <rdf:li resource="https://github.com/Quodatum/ex-graphviz"/>
             </rdf:Bag>
           </dc:creator>
         </rdf:Description>
       </rdf:RDF>
-	  </metadata>,
-  $svg/*}
-  </svg>
- 
+      </metadata>
 };
-
 
 (:~
 : set svg to autosize 100%
 :)
-declare function autosize($svg as node()) as node(){
+declare function autosize($svg as element(svg:svg)) as element(svg:svg)
+{
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
   {$svg/@* except ($svg/@width,$svg/@height,$svg/@preserveAspectRatio),
@@ -113,7 +123,8 @@ declare function autosize($svg as node()) as node(){
 (:~
 : set svg to autosize 100%
 :)
-declare function autosize-old($svg as node()) as node(){
+declare function autosize-old($svg as node()) as node()
+{
   xslt:transform($svg , fn:resolve-uri("dotml/dotpatch.xsl"))
 };
 
