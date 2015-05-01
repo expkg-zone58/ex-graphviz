@@ -12,5 +12,5 @@ basex build.xq
 ````
 ## Test
 ````
-basex -t srs/test/test.xq
+basex -t srs/test/basic.xq
 ````

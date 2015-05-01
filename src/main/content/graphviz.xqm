@@ -41,6 +41,17 @@ declare function dot( $dot as xs:string*, $params as xs:string*) as node()*
                 return dot-svg($r)
 };
 
+(:~
+:Layout one or more graphs given in the DOT language and render them as SVG.
+:)
+declare function dot-to-svg( $dot as xs:string, $params as xs:string*) as document-node()
+{
+   let $params:=("-Tsvg")
+   return if(fn:not($dot))
+           then $gr:empty
+           else let $r:=dot-execute($dot,$params)
+                return document{fn:parse-xml($r/output)}
+};
 (:~ run dot command :)
 declare %private function dot-execute( $dot as xs:string, $params as xs:string*) as element(result)
 {

@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2015-04-30T23:18:08.712+01:00</xqdoc:date>
+    <xqdoc:date>2015-05-01T23:44:21.975+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -76,6 +76,26 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
       </xqdoc:parameters>
       <xqdoc:return>
         <xqdoc:type occurrence="*">node()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>Layout one or more graphs given in the DOT language and render them as SVG.</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>dot-to-svg</xqdoc:name>
+      <xqdoc:signature>declare function dot-to-svg($dot as xs:string, $params as xs:string*) as document-node()</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>dot</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>params</xqdoc:name>
+          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>document-node()</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="2">
