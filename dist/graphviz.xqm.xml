@@ -1,10 +1,10 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2015-05-02T22:18:29.225+01:00</xqdoc:date>
+    <xqdoc:date>2015-05-02T23:24:53.299+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
-    <xqdoc:uri>quodatum.ex-graphviz</xqdoc:uri>
+    <xqdoc:uri>http://expkg-zone58.github.io/ex-graphviz/</xqdoc:uri>
     <xqdoc:name>graphviz.xqm</xqdoc:name>
     <xqdoc:comment>
       <xqdoc:description>graphviz module
@@ -12,7 +12,7 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
     </xqdoc:comment>
   </xqdoc:module>
   <xqdoc:namespaces>
-    <xqdoc:namespace prefix="gr" uri="quodatum.ex-graphviz"/>
+    <xqdoc:namespace prefix="gr" uri="http://expkg-zone58.github.io/ex-graphviz/"/>
     <xqdoc:namespace prefix="proc" uri="http://basex.org/modules/proc"/>
     <xqdoc:namespace prefix="file" uri="http://expath.org/ns/file"/>
     <xqdoc:namespace prefix="xslt" uri="http://basex.org/modules/xslt"/>
@@ -58,24 +58,21 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
     </xqdoc:variable>
   </xqdoc:variables>
   <xqdoc:functions>
-    <xqdoc:function arity="2">
+    <xqdoc:function arity="1">
       <xqdoc:comment>
-        <xqdoc:description>Layout one or more graphs given in the DOT language and render them as SVG.</xqdoc:description>
+        <xqdoc:description>Layout graphs given in the DOT language and</xqdoc:description>
+        <xqdoc:return>svg document</xqdoc:return>
       </xqdoc:comment>
-      <xqdoc:name>dot</xqdoc:name>
-      <xqdoc:signature>declare function dot($dot as xs:string*, $params as xs:string*) as node()*</xqdoc:signature>
+      <xqdoc:name>dot-to-svg</xqdoc:name>
+      <xqdoc:signature>declare function dot-to-svg($dot as xs:string) as document-node()</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>dot</xqdoc:name>
-          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
-        </xqdoc:parameter>
-        <xqdoc:parameter>
-          <xqdoc:name>params</xqdoc:name>
-          <xqdoc:type occurrence="*">xs:string</xqdoc:type>
+          <xqdoc:type>xs:string</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
-        <xqdoc:type occurrence="*">node()</xqdoc:type>
+        <xqdoc:type>document-node()</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="2">

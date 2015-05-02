@@ -3,8 +3,8 @@
 : based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz
 :)
 
-module namespace gr="quodatum.ex-graphviz";
-declare default function namespace 'quodatum.ex-graphviz';
+module namespace gr="http://expkg-zone58.github.io/ex-graphviz/";
+declare default function namespace 'http://expkg-zone58.github.io/ex-graphviz/';
 import module namespace proc="http://basex.org/modules/proc";
 import module namespace file="http://expath.org/ns/file";
 import module namespace xslt="http://basex.org/modules/xslt";
@@ -29,17 +29,14 @@ width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 </svg>
 };
 
+
 (:~
-:Layout one or more graphs given in the DOT language and render them as SVG.
+: Layout graphs given in the DOT language and 
+: @return svg document
 :)
-declare function dot( $dot as xs:string*, $params as xs:string*) as node()*
+declare function dot-to-svg( $dot as xs:string) as document-node()
 {
-   let $params:=("-Tsvg")
-    for $d in $dot 
-    return if(fn:not($d))
-           then $gr:empty
-           else let $r:=dot-execute($d,$params)
-                return dot-svg($r)
+    dot-to-svg( $dot, ()) 
 };
 
 (:~

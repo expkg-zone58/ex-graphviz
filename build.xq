@@ -34,7 +34,7 @@ declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/pkg:package;
 };
 let $files:=local:files() 
 let $xar:= local:zip($files)
-let $name:= concat($package/@name , "-" ,$package/@version, ".xar")
+let $name:= concat($package/@abbrev , "-" ,$package/@version, ".xar")
 let $xq:=resolve-uri("content/" ||$package/pkg:xquery/pkg:file,$src)
 return ( file:write-binary(resolve-uri($name,$dest),$xar),
          $package/pkg:xquery/pkg:file!local:save-xqdoc(.)  
