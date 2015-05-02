@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2015-05-01T23:44:21.975+01:00</xqdoc:date>
+    <xqdoc:date>2015-05-02T22:18:29.225+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -54,7 +54,7 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
       <xqdoc:annotations>
         <xqdoc:annotation name="private"/>
       </xqdoc:annotations>
-      <xqdoc:type>element()</xqdoc:type>
+      <xqdoc:type>document-node()</xqdoc:type>
     </xqdoc:variable>
   </xqdoc:variables>
   <xqdoc:functions>

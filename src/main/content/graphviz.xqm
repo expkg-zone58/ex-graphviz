@@ -22,11 +22,12 @@ declare %private variable $gr:tmpdir:=if(file:dir-separator()="\")
                                       then fn:environment-variable("TEMP") || "\"
                                       else "/tmp/";
                                       
-declare %private variable $gr:empty:=
+declare %private variable $gr:empty:=document{
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 20" version="1.1" 
 width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
    <text x="150" y="10"  text-anchor="middle">Empty.</text>
-</svg>;
+</svg>
+};
 
 (:~
 :Layout one or more graphs given in the DOT language and render them as SVG.

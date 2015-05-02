@@ -14,7 +14,7 @@ declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/pkg:package;
  declare function local:files() as xs:string*
  {
    filter(file:list($src,fn:true()),
-          file:is-file#1
+          function ($f){file:is-file($src || $f)}
         )
           !translate(.,"\","/") 
  };
@@ -39,3 +39,4 @@ let $xq:=resolve-uri("content/" ||$package/pkg:xquery/pkg:file,$src)
 return ( file:write-binary(resolve-uri($name,$dest),$xar),
          $package/pkg:xquery/pkg:file!local:save-xqdoc(.)  
 )
+
