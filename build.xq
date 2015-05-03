@@ -7,7 +7,7 @@ declare variable $src:=resolve-uri("src/main/");
 declare variable $dest:=resolve-uri("dist/");
 
 declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/pkg:package;
-
+declare variable $content:=fn:resolve-uri($package/@abbrev,$src);
 (:~
  : file paths below $src
  :)
@@ -28,14 +28,14 @@ declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/pkg:package;
  };
  
  declare function local:save-xqdoc($path as xs:string){
-  let $xqdoc:=inspect:xqdoc($path,$src)
+  let $xqdoc:=inspect:xqdoc($path,$content)
   let $target:=resolve-uri($path || ".xml",$dest)
   return file:write($target,$xqdoc) 
 };
 let $files:=local:files() 
 let $xar:= local:zip($files)
 let $name:= concat($package/@abbrev , "-" ,$package/@version, ".xar")
-let $xq:=resolve-uri("content/" ||$package/pkg:xquery/pkg:file,$src)
+let $xq:=resolve-uri($package/pkg:xquery/pkg:file,$content)
 return ( file:write-binary(resolve-uri($name,$dest),$xar),
          $package/pkg:xquery/pkg:file!local:save-xqdoc(.)  
 )
