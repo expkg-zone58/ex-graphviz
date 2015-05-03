@@ -28,7 +28,7 @@ declare variable $package:=doc(resolve-uri("expath-pkg.xml",$src))/pkg:package;
  };
  
  declare function local:save-xqdoc($path as xs:string){
-  let $xqdoc:=inspect:xqdoc(resolve-uri("content/" || $path,$src))
+  let $xqdoc:=inspect:xqdoc($path,$src)
   let $target:=resolve-uri($path || ".xml",$dest)
   return file:write($target,$xqdoc) 
 };

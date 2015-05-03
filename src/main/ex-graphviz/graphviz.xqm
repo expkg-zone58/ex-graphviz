@@ -3,26 +3,26 @@
 : based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz
 :)
 
-module namespace gr="http://expkg-zone58.github.io/ex-graphviz/";
-declare default function namespace 'http://expkg-zone58.github.io/ex-graphviz/';
+module namespace ex-graphviz="http://expkg-zone58.github.io/ex-graphviz";
+declare default function namespace 'http://expkg-zone58.github.io/ex-graphviz';
+
 import module namespace proc="http://basex.org/modules/proc";
 import module namespace file="http://expath.org/ns/file";
-import module namespace xslt="http://basex.org/modules/xslt";
 
 declare namespace svg= "http://www.w3.org/2000/svg";
 declare namespace  xlink="http://www.w3.org/1999/xlink";
 
-declare %private variable $gr:dotpath:=if(fn:environment-variable("DOTPATH"))
+declare %private variable $ex-graphviz:dotpath:=if(fn:environment-variable("DOTPATH"))
                                       then fn:environment-variable("DOTPATH")
                                       else "dot";
 (:~
 : folder for temp files \=windows
 :)
-declare %private variable $gr:tmpdir:=if(file:dir-separator()="\")
+declare %private variable $ex-graphviz:tmpdir:=if(file:dir-separator()="\")
                                       then fn:environment-variable("TEMP") || "\"
                                       else "/tmp/";
                                       
-declare %private variable $gr:empty:=document{
+declare %private variable $ex-graphviz:empty:=document{
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 20" version="1.1" 
 width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
    <text x="150" y="10"  text-anchor="middle">Empty.</text>
@@ -34,44 +34,44 @@ width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
 : Layout graphs given in the DOT language and 
 : @return svg document
 :)
-declare function dot-to-svg( $dot as xs:string) as document-node()
+declare function to-svg( $dot as xs:string) as document-node()
 {
-    dot-to-svg( $dot, ()) 
+    to-svg( $dot, ()) 
 };
 
 (:~
 :Layout one or more graphs given in the DOT language and render them as SVG.
 :)
-declare function dot-to-svg( $dot as xs:string, $params as xs:string*) as document-node()
+declare function to-svg( $dot as xs:string, $params as xs:string*) as document-node()
 {
    let $params:=("-Tsvg")
    return if(fn:not($dot))
-           then $gr:empty
+           then $ex-graphviz:empty
            else let $r:=dot-execute($dot,$params)
                 return document{fn:parse-xml($r/output)}
 };
 (:~ run dot command :)
 declare %private function dot-execute( $dot as xs:string, $params as xs:string*) as element(result)
 {
-    let $fname:=$gr:tmpdir || random:uuid()
+    let $fname:=$ex-graphviz:tmpdir || random:uuid()
     let $junk:=file:write-text($fname,$dot)
-    let $r:=proc:execute($gr:dotpath , ($params,$fname))
+    let $r:=proc:execute($ex-graphviz:dotpath , ($params,$fname))
     let $junk:=file:delete($fname)
     return if($r/code!="0")
-           then  fn:error(xs:QName('gr:dot1'),$r/error) 
+           then  fn:error(xs:QName('ex-graphviz:dot1'),$r/error) 
            else $r
 };
 
 (:~ run dot command  returning binary :)
 declare  function dot-executeb( $dot as xs:string, $params as xs:string*) as xs:base64Binary
 {
-    let $fname:=$gr:tmpdir || random:uuid()
+    let $fname:=$ex-graphviz:tmpdir || random:uuid()
     let $oname:=$fname || ".o"
     let $junk:=file:write-text($fname,$dot)
-    let $r:=proc:execute($gr:dotpath , ($params,"-o"|| $oname,$fname))
+    let $r:=proc:execute($ex-graphviz:dotpath , ($params,"-o"|| $oname,$fname))
     let $junk:=file:delete($fname)
     return if($r/code!="0")
-           then  fn:error(xs:QName('gr:dot1'),$r/error) 
+           then  fn:error(xs:QName('ex-graphviz:dot1'),$r/error) 
            else  let $d:=file:read-binary($oname)
                  (: let $junk:=file:delete($oname) :) 
                  return $d                  
@@ -127,13 +127,5 @@ declare function autosize($svg as element(svg:svg)) as element(svg:svg)
   {$svg/@* except ($svg/@width,$svg/@height,$svg/@preserveAspectRatio),
   $svg/*}
   </svg>
-};
-
-(:~
-: set svg to autosize 100%
-:)
-declare function autosize-old($svg as node()) as node()
-{
-  xslt:transform($svg , fn:resolve-uri("dotml/dotpatch.xsl"))
 };
 
