@@ -1,14 +1,16 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2015-05-03T23:30:58.145+01:00</xqdoc:date>
+    <xqdoc:date>2017-03-17T10:46:44.915Z</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
     <xqdoc:uri>http://expkg-zone58.github.io/ex-graphviz</xqdoc:uri>
     <xqdoc:name>graphviz.xqm</xqdoc:name>
     <xqdoc:comment>
-      <xqdoc:description>graphviz module
-based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:description>
+      <xqdoc:description>Wrapper for using  <a href="graphviz.org">Graphviz</a>.
+It requires the Graphviz executables are available on path or in folder located by $GVPATH</xqdoc:description>
+      <xqdoc:version>0.2.0</xqdoc:version>
+      <xqdoc:author>Andy Bunce</xqdoc:author>
     </xqdoc:comment>
   </xqdoc:module>
   <xqdoc:namespaces>
@@ -29,24 +31,10 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
   </xqdoc:imports>
   <xqdoc:variables>
     <xqdoc:variable>
-      <xqdoc:name>ex-graphviz:dotpath</xqdoc:name>
-      <xqdoc:annotations>
-        <xqdoc:annotation name="private"/>
-      </xqdoc:annotations>
-      <xqdoc:type occurrence="*">item()</xqdoc:type>
-    </xqdoc:variable>
-    <xqdoc:variable>
-      <xqdoc:name>ex-graphviz:tmpdir</xqdoc:name>
-      <xqdoc:comment>
-        <xqdoc:description>folder for temp files \=windows</xqdoc:description>
-      </xqdoc:comment>
-      <xqdoc:annotations>
-        <xqdoc:annotation name="private"/>
-      </xqdoc:annotations>
-      <xqdoc:type occurrence="*">item()</xqdoc:type>
-    </xqdoc:variable>
-    <xqdoc:variable>
       <xqdoc:name>ex-graphviz:empty</xqdoc:name>
+      <xqdoc:comment>
+        <xqdoc:description>SVG to return when supplied dot string is empty</xqdoc:description>
+      </xqdoc:comment>
       <xqdoc:annotations>
         <xqdoc:annotation name="private"/>
       </xqdoc:annotations>
@@ -56,11 +44,11 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
   <xqdoc:functions>
     <xqdoc:function arity="1">
       <xqdoc:comment>
-        <xqdoc:description>Layout graphs given in the DOT language and</xqdoc:description>
+        <xqdoc:description>Layout graph in the DOT language and return as SVG</xqdoc:description>
         <xqdoc:return>svg document</xqdoc:return>
       </xqdoc:comment>
-      <xqdoc:name>to-svg</xqdoc:name>
-      <xqdoc:signature>declare function to-svg($dot as xs:string) as document-node()</xqdoc:signature>
+      <xqdoc:name>ex-graphviz:to-svg</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:to-svg($dot as xs:string) as document-node()</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>dot</xqdoc:name>
@@ -73,10 +61,14 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
     </xqdoc:function>
     <xqdoc:function arity="2">
       <xqdoc:comment>
-        <xqdoc:description>Layout one or more graphs given in the DOT language and render them as SVG.</xqdoc:description>
+        <xqdoc:description>Layout  graph given in the DOT language and render  as SVG.</xqdoc:description>
+        <xqdoc:param>$dot dot string</xqdoc:param>
+        <xqdoc:param>$params additional arguments supplied to executable</xqdoc:param>
+        <xqdoc:return>svg document</xqdoc:return>
+        <xqdoc:error>ex-graphviz:exec error running executable</xqdoc:error>
       </xqdoc:comment>
-      <xqdoc:name>to-svg</xqdoc:name>
-      <xqdoc:signature>declare function to-svg($dot as xs:string, $params as xs:string*) as document-node()</xqdoc:signature>
+      <xqdoc:name>ex-graphviz:to-svg</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:to-svg($dot as xs:string, $params as xs:string*) as document-node()</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>dot</xqdoc:name>
@@ -94,12 +86,16 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
     <xqdoc:function arity="2">
       <xqdoc:comment>
         <xqdoc:description>run dot command</xqdoc:description>
+        <xqdoc:param>$dot dot string</xqdoc:param>
+        <xqdoc:param>$params additional arguments supplied to executable</xqdoc:param>
+        <xqdoc:return/>
+        <xqdoc:error>ex-graphviz:exec error running executable</xqdoc:error>
       </xqdoc:comment>
-      <xqdoc:name>dot-execute</xqdoc:name>
+      <xqdoc:name>ex-graphviz:dot-execute</xqdoc:name>
       <xqdoc:annotations>
         <xqdoc:annotation name="private"/>
       </xqdoc:annotations>
-      <xqdoc:signature>declare %private function dot-execute($dot as xs:string, $params as xs:string*) as element(result)</xqdoc:signature>
+      <xqdoc:signature>declare %private function ex-graphviz:dot-execute($dot as xs:string, $params as xs:string*) as element(result)</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>dot</xqdoc:name>
@@ -117,9 +113,12 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
     <xqdoc:function arity="2">
       <xqdoc:comment>
         <xqdoc:description>run dot command  returning binary</xqdoc:description>
+        <xqdoc:param>$dot dot string</xqdoc:param>
+        <xqdoc:param>$params additional arguments supplied to executable</xqdoc:param>
+        <xqdoc:error>ex-graphviz:exec error running executable</xqdoc:error>
       </xqdoc:comment>
-      <xqdoc:name>dot-executeb</xqdoc:name>
-      <xqdoc:signature>declare function dot-executeb($dot as xs:string, $params as xs:string*) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:name>ex-graphviz:dot-executeb</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:dot-executeb($dot as xs:string, $params as xs:string*) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>dot</xqdoc:name>
@@ -138,15 +137,12 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
       <xqdoc:comment>
         <xqdoc:description>cleanup dot svg result</xqdoc:description>
       </xqdoc:comment>
-      <xqdoc:name>dot-svg</xqdoc:name>
-      <xqdoc:annotations>
-        <xqdoc:annotation name="private"/>
-      </xqdoc:annotations>
-      <xqdoc:signature>declare %private function dot-svg($r as element(result)) as element(svg:svg)</xqdoc:signature>
+      <xqdoc:name>ex-graphviz:clean</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:clean($doc as document-node()) as element(svg:svg)</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
-          <xqdoc:name>r</xqdoc:name>
-          <xqdoc:type>element(result)</xqdoc:type>
+          <xqdoc:name>doc</xqdoc:name>
+          <xqdoc:type>document-node()</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
@@ -154,8 +150,11 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
       </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="2">
-      <xqdoc:name>rdf</xqdoc:name>
-      <xqdoc:signature>declare function rdf($title as xs:string, $ver as xs:string) as item()*</xqdoc:signature>
+      <xqdoc:comment>
+        <xqdoc:description>Generate metadata RDF for operation suitable for inclusion in SVG</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>ex-graphviz:rdf</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:rdf($title as xs:string, $ver as xs:string) as element(svg:metadata)</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>title</xqdoc:name>
@@ -167,15 +166,15 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
-        <xqdoc:type>element()</xqdoc:type>
+        <xqdoc:type>element(svg:metadata)</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="1">
       <xqdoc:comment>
-        <xqdoc:description>set svg to autosize 100%</xqdoc:description>
+        <xqdoc:description>Tweak svg to autosize to 100%, assumes svg is from graphviz and viewBox is set.</xqdoc:description>
       </xqdoc:comment>
-      <xqdoc:name>autosize</xqdoc:name>
-      <xqdoc:signature>declare function autosize($svg as element(svg:svg)) as element(svg:svg)</xqdoc:signature>
+      <xqdoc:name>ex-graphviz:autosize</xqdoc:name>
+      <xqdoc:signature>declare function ex-graphviz:autosize($svg as element(svg:svg)) as element(svg:svg)</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>svg</xqdoc:name>
@@ -184,6 +183,25 @@ based on http://www.zorba-xquery.com/html/modules/zorba/image/graphviz</xqdoc:de
       </xqdoc:parameters>
       <xqdoc:return>
         <xqdoc:type>element(svg:svg)</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="1">
+      <xqdoc:comment>
+        <xqdoc:description>graphviz executable.</xqdoc:description>
+      </xqdoc:comment>
+      <xqdoc:name>ex-graphviz:exe</xqdoc:name>
+      <xqdoc:annotations>
+        <xqdoc:annotation name="private"/>
+      </xqdoc:annotations>
+      <xqdoc:signature>declare %private function ex-graphviz:exe($name as xs:string) as xs:string</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>name</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>xs:string</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
   </xqdoc:functions>

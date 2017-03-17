@@ -1,0 +1,42 @@
+<!--  @see http://cxan.org/faq#add-pkg  -->
+<repo abbrev="ex-graphviz">
+  <pkg abbrev="ex-graphviz" id="http://expkg-zone58.github.io/ex-dotml">
+    <name>http://expkg-zone58.github.io/ex-graphviz</name>
+    <abstract>XQuery interface to Graphviz</abstract>
+    <author id="abunce">Andy Bunce</author>
+    <maintainer id="abunce">Andy Bunce</maintainer>
+    <category id="libs">Libraries</category>
+    <home>http://graphviz.org/</home>
+    <tag>graphics</tag>
+    <tag>svg</tag>
+    <tag>graphviz</tag>
+    <version num="0.0.5">
+      <dependency processor="basex"/>
+      <file name="ex-dotml-0.0.5.xar" role="pkg"/>
+    </version>
+    <version num="0.0.6">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.0.7">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.0.8">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.0.9">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.1.0">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.2.0">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.2.1">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+    <version num="0.2.2">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+  </pkg>
+</repo>
