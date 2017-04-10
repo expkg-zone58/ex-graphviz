@@ -1,0 +1,10 @@
+<package xmlns="http://cxan.org/ns/package" id="graphviz">
+    <abstract>Graph (network) visualization project from AT&amp;T Research.</abstract>
+    <author id="graphviz">Graphviz</author>
+    <maintainer id="abunce">Andy Bunce</maintainer>
+    <home>http://www.graphviz.org/</home>
+    <category id="libs">Library</category>
+    <tag>graphviz</tag>
+    <tag>svg</tag>
+    <tag>graphic</tag>
+</package>

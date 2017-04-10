@@ -2,7 +2,7 @@
  : ex-graphviz tests
  :)
 module namespace test = 'http://basex.org/modules/xqunit-tests';
-import module namespace ex-graphviz="http://expkg-zone58.github.io/ex-graphviz";
+import module namespace ex-graphviz="expkg-zone58:image.graphviz" at "../main/content/graphviz.xqm";
 
 declare %unit:test
 (:~

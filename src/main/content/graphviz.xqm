@@ -1,11 +1,11 @@
 (:~
 : Wrapper for using  <a href="graphviz.org">Graphviz</a>.
 : It requires the Graphviz executables are available on path or in folder located by $GVPATH
-: @version 0.2.0
+: @version 0.3.0
 : @author Andy Bunce 
 :)
 
-module namespace ex-graphviz="http://expkg-zone58.github.io/ex-graphviz";
+module namespace ex-graphviz="expkg-zone58:image.graphviz";
 
 
 import module namespace proc="http://basex.org/modules/proc";

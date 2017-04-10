@@ -1,20 +1,20 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2017-03-17T10:46:44.915Z</xqdoc:date>
+    <xqdoc:date>2017-04-10T18:51:39.705+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
-    <xqdoc:uri>http://expkg-zone58.github.io/ex-graphviz</xqdoc:uri>
+    <xqdoc:uri>expkg-zone58:image.graphviz</xqdoc:uri>
     <xqdoc:name>graphviz.xqm</xqdoc:name>
     <xqdoc:comment>
       <xqdoc:description>Wrapper for using  <a href="graphviz.org">Graphviz</a>.
 It requires the Graphviz executables are available on path or in folder located by $GVPATH</xqdoc:description>
-      <xqdoc:version>0.2.0</xqdoc:version>
+      <xqdoc:version>0.3.0</xqdoc:version>
       <xqdoc:author>Andy Bunce</xqdoc:author>
     </xqdoc:comment>
   </xqdoc:module>
   <xqdoc:namespaces>
-    <xqdoc:namespace prefix="ex-graphviz" uri="http://expkg-zone58.github.io/ex-graphviz"/>
+    <xqdoc:namespace prefix="ex-graphviz" uri="expkg-zone58:image.graphviz"/>
     <xqdoc:namespace prefix="proc" uri="http://basex.org/modules/proc"/>
     <xqdoc:namespace prefix="file" uri="http://expath.org/ns/file"/>
     <xqdoc:namespace prefix="svg" uri="http://www.w3.org/2000/svg"/>
