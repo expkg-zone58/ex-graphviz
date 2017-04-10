@@ -1,13 +1,13 @@
 <package xmlns="http://expath.org/ns/pkg"
          name="http://expkg-zone58.github.io/ex-graphviz"
          abbrev="ex-graphviz"
-         version="0.3.0"
+         version="0.3.1"
          spec="1.0">
 
    <title>XQuery interface for Graphviz with EXPath packaging.</title>
    <dependency processor="basex" />
    <xquery> 
-     <namespace>expkg-zone58:image.thumbnailator</namespace>
+     <namespace>expkg-zone58:image.graphviz</namespace>
      <file>graphviz.xqm</file>
    </xquery>
 
